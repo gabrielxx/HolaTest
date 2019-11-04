@@ -1,0 +1,119 @@
+
+<div class="row mt-5">
+  <div class="col-10 offset-1">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 col-sm-6">
+            <h4 class="card-title">Listado de Noticias</h4>
+          </div>
+          <div class="col-md-6 col-sm-6 text-right">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#NewsModal">
+              <i class="fas fa-plus"></i>
+              Nueva Noticia
+            </button>
+          </div>
+        </div>
+        <div class="table-responsive mt-4">
+          <table #datatable class="table dark-table table-striped ">
+            <thead class="bg-dark text-light">
+              <tr>
+                <th width='25'>Título</th>
+                <th width='45%'>Subtitulo</th>
+                <th width='15%'>Categoria</th>
+                <th width='15%' class="no-sort"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let new of news | async">
+                <td class="font-weight-bolder">{{new.title}}</td>
+                <td >{{new.subtitle}}</td>
+                <td class="text-capitalize">{{new.category}}</td>
+                <td>
+                  <button class="btn btn-info mr-1" title="Editar" (click)="onEditPropiedad(new)">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn btn-danger" title="Eliminar" (click)="onDeleteNew(new)">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade " id="NewsModal" #modal tabindex="-1" role="dialog" aria-labelledby="NewsModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h5 class="modal-title text-light font-weight-bold">Registro de Noticias</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form (ngSubmit)="onSaveNew()" [formGroup]="formNews" ngNativeValidate="false">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="col-form-label font-weight-bold">Título:</label>
+            <input type='text' class="form-control" placeholder="Título" formControlName="title">
+            <span *ngIf="!formNews.get('title').valid" class="invalid-feedback">
+                Ingrese el Título.
+              </span>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label font-weight-bold">Subtítulo:</label>
+            <textarea class="form-control" placeholder="Subtítulo" formControlName="subtitle"></textarea>
+            <span *ngIf="!formNews.get('subtitle').valid" class="invalid-feedback">
+              Ingrese el Subtítulo.
+            </span>
+          </div>
+          <div class="form-group">
+              <label class="col-form-label font-weight-bold">Imagen:</label>
+              <input type='file' class="form-control" placeholder="Título" formControlName="image">
+              <span *ngIf="!formNews.get('image').valid" class="invalid-feedback">
+                  Ingrese la Imagen.
+                </span>
+            </div>
+          <div class="form-group">
+            <label class="col-form-label font-weight-bold">Contenido de la Noticia:</label>
+            <textarea class="form-control" placeholder="Contenido de la Noticia" formControlName="content"></textarea>
+            <span *ngIf="!formNews.get('content').valid" class="invalid-feedback">
+              Ingrese el Contenido de la Noticia.
+            </span>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label font-weight-bold" >Categoría:</label>
+            <select class="custom-select form-control"  formControlName="category" >
+              <option value=''> Seleccione la Categoría</option>
+              <option value="internacionales">Internacionales</option>
+              <option value="deporte">Deporte</option>
+              <option value="economia">Economia</option>
+              <option value="politica">Politica</option>
+              <option value="sucesos">Sucesos</option>
+            </select>
+            <span *ngIf="!formNews.get('category').valid" class="invalid-feedback">
+              Ingrese la Categoría.
+            </span>
+          </div>
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            <i class="fas fa-times"></i>
+            Cerrar
+          </button>
+          <button [disabled]="!formNews.valid" class="btn btn-primary" >
+            <i class="fas fa-save"></i>
+            Guardar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

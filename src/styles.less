@@ -1,1 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+.invalid-feedback{
+    display: block;
+}
+.form-control.ng-invalid{
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220,53,69,.25);
+}
+.form-control.ng-untouched.ng-invalid{
+    border: 1px solid #ced4da;
+    box-shadow: none;
+}
+.form-control.ng-dirty.ng-invalid.ng-untouched{
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220,53,69,.25);
+}
+.form-control.ng-untouched.ng-invalid ~.invalid-feedback{
+    display: none;
+ }
+ .form-control.ng-dirty.ng-invalid.ng-untouched ~.invalid-feedback{
+    display: block;
+ }

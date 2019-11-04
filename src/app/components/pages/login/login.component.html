@@ -1,0 +1,39 @@
+<div class="content">
+  <div class="col-md-9 col-sm-9 col-lg-4">
+    <div class="row">
+      <div class="col-md-6 col-sm-6 col-6 col-lg-9">
+        <img src="assets/img/Logo.png" width="250px" class="mb-3" alt="">
+      </div>
+      <div class="col-md-6 col-sm-6 col-6 col-lg-3 text-right">
+        <i class="fa fa-lock fa-20"></i>
+      </div>
+    </div>
+    <div class="text-right mb-3">
+        <h3 class="h3"> Iniciar Sesión</h3>
+      </div>
+    <form (ngSubmit)="onLogin()" [formGroup]="formLoginUser" ngNativeValidate="false">
+      <div class="form-group">
+        <input type="email" class="form-control form-control-lg inputTrans" autocomplete="false" formControlName="email"
+          placeholder="E-mail *"
+          [ngClass]="{'is-invalid': !formLoginUser.get('email').valid, 'is-valid': formLoginUser.get('email').valid}">
+        <span *ngIf="!formLoginUser.get('email').valid" class="invalid-feedback">
+          Debe llena esta campo
+        </span>
+      </div>
+      <div class="form-group">
+        <input type="password" formControlName="password" class="form-control form-control-lg inputTrans"
+          placeholder="Contraseña  *"
+          [ngClass]="{'is-invalid': !formLoginUser.get('password').valid, 'is-valid': formLoginUser.get('password').valid}">
+        <span *ngIf="!formLoginUser.get('password').valid" class="invalid-feedback">
+          Debe llena esta campo
+        </span>
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="Check" autocomplete="false">
+        <label class="form-check-label" for="Check">Mantener la sesión abierta</label>
+      </div>
+      <button [disabled]="!formLoginUser.valid" class="btn btn-lg btn-login btn-width">Iniciar Sesión</button>
+    </form>
+ 
+  </div>
+</div>
