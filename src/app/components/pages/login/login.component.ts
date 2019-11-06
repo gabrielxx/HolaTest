@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../../providers/authentication.service';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-login',
@@ -26,8 +27,8 @@ export class LoginComponent {
       () => {
         this.router.navigate(['/admin']);
       },
-      (err) => {
-        // this.toastr.error(err.message, 'Error');
+      (error) => {
+        Swal.fire('Error!', error.message, 'error')
       }
     )
 

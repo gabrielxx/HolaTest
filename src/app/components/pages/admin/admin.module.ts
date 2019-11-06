@@ -6,12 +6,14 @@ import { HeaderComponent } from './shared/header/header.component';
 import { ADMIN_ROUTES } from './admin.routes';
 import { NewsService } from 'src/app/providers/news.service';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
     AdminComponent, 
     NewsComponent,
-    HeaderComponent
+    HeaderComponent,
+    UsersComponent
   ],
   imports: [
     CommonModule,

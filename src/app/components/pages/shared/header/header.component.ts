@@ -20,13 +20,4 @@ export class HeaderComponent implements OnInit {
   onSearchCategory(category){
     this._newsService.onFilterNews(category)
   }
-  // onLogoutUser(){
-  //   this.afAuth.auth.signOut();
-  //   this.router.navigate(['/login']);
-  // }
-  // onLoadDataUser(){
-  //   this.afAuth.user.subscribe( data => {
-  //     this.userData = data;
-  //   })
-  // }
 }

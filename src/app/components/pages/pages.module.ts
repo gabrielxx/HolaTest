@@ -10,12 +10,15 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
 import { NewsService } from 'src/app/providers/news.service';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { DetailNewsComponent } from './detail-news/detail-news.component';
 
 @NgModule({
   declarations: [
     PagesComponent, 
     HeaderComponent, 
-    FooterComponent,    
+    FooterComponent,
+    DetailNewsComponent,    
   ],
 
   imports: [
@@ -24,6 +27,7 @@ import { NewsService } from 'src/app/providers/news.service';
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireAuthGuardModule,
+    NgxPaginationModule
   ],
   exports: [
     PagesComponent

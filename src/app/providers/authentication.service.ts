@@ -22,7 +22,7 @@ export class AuthenticationService {
     .then((userData) => {
       var user = this.afAuth.auth.currentUser;
       user.updateProfile({
-        displayName: data.displayName,
+        displayName: data.name +' '+ data.lastname,
      })
       successCallback(userData)
     })

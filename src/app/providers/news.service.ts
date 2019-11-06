@@ -15,7 +15,7 @@ export interface News {
 })
 export class NewsService {
   private itemsCollection: AngularFirestoreCollection<News>;
-  private oDocument: AngularFirestoreDocument<News>;
+  private itemDoc: AngularFirestoreDocument<News>;
   public news: any;
 
   @Output() change: EventEmitter<boolean> = new EventEmitter();
@@ -63,4 +63,17 @@ export class NewsService {
     this.news = data;
     this.change.emit(this.news);
   }
+  onUpdateNews(news,successCallback,errorCallback){
+    this.itemsCollection.doc(news.id).set(news).then(function () {
+      successCallback()
+    }).catch(function (error) {
+      errorCallback()
+    });
+  }
+  onLoadDetailNew(id){
+        this.itemDoc = this.db.doc(`/news/${id}`);
+        let data = this.itemDoc.valueChanges();
+        return data;
+  }
+
 }

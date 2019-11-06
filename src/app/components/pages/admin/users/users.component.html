@@ -1,0 +1,124 @@
+<div class="row mt-5">
+  <div class="col-10 offset-1">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 col-sm-6">
+            <h4 class="card-title">Listado de Usuarios</h4>
+          </div>
+          <div class="col-md-6 col-sm-6 text-right">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#userModal">
+              <i class="fas fa-plus"></i>
+              Nuevo Usuario
+            </button>
+          </div>
+        </div>
+        <div class="table-responsive mt-4">
+          <table #datatable class="table dark-table table-striped ">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Email</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="!(users)">
+                    <td colspan='4' class="text-center p-5">
+                      <div class="spinner-border  text-primary p-3 " role="status">
+                        <span class="sr-only">Loading...</span>
+                      </div>
+                      <h5 class="h5 font-weight-bold  mt-3">Cargando...</h5>
+                    </td>
+                  </tr>
+              <tr *ngFor="let user of users; let i = index">
+                <th scope="row">{{i + 1}}</th>
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="userModal" #modal tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true"
+  data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-dark text-light">
+        <h5 class="modal-title" id="userModalLabel">Nuevo Usuario</h5>
+        <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close"
+          (click)="formUser.reset()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form (ngSubmit)="onSaveUser()" [formGroup]="formUser" novalidate>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-10 offset-1">
+              <div class="form-group row">
+                <label for="name" class="col-sm-3 col-form-label">Nombre</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" formControlName="name" placeholder="Nombre"
+                    [ngClass]="{'is-invalid': !formUser.get('name').valid, 'is-valid': formUser.get('name').valid}">
+                  <span *ngIf="!formUser.get('name').valid" class="invalid-feedback">
+                    Este campo es obligatorio.
+                  </span>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="name" class="col-sm-3 col-form-label">Apellido</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" formControlName="lastname" placeholder="Apellido"
+                    [ngClass]="{'is-invalid': !formUser.get('lastname').valid, 'is-valid': formUser.get('lastname').valid}">
+                  <span *ngIf="!formUser.get('lastname').valid" class="invalid-feedback">
+                    Este campo es obligatorio.
+                  </span>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="email" class="col-sm-3 col-form-label">Email</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" formControlName="email" placeholder="Email"
+                    [ngClass]="{'is-invalid': !formUser.get('email').valid, 'is-valid': formUser.get('email').valid}">
+                  <span *ngIf="!formUser.get('email').valid" class="invalid-feedback">
+                    Este campo es obligatorio.
+                  </span>
+                </div>
+              </div>
+              <div class="form-group row ">
+                <label for="password" class="col-sm-3 col-form-label">Password</label>
+                <div class="col-sm-9">
+                  <input type="password" class="form-control" formControlName="password" placeholder="Password"
+                    autocomplete="false"
+                    [ngClass]="{'is-invalid': !formUser.get('password').valid, 'is-valid': formUser.get('password').valid}">
+                  <span *ngIf="!formUser.get('password').valid" class="invalid-feedback">
+                    {{formUser.get('password').errors.required ? 'Este campo es obligatorio.' : formUser.get('password').errors.minlength ? 'Este campo debe tener 6 min. caracteres.' : ''}}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="formUser.reset()">
+            <i class="fas fa-times"></i>
+            Cerrar
+          </button>
+          <button [disabled]="!formUser.valid" class="btn btn-primary">
+            <i class="fas fa-save"></i>
+            Guardar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
